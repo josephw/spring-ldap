@@ -119,6 +119,10 @@ public class DefaultDirObjectFactory implements DirObjectFactory {
 		String nameString = "";
 		String referralUrl = "";
 
+		if (log.isDebugEnabled()) {
+		    log.debug("Received an instance of " + name.getClass().getName() + ": " + name);
+		}
+
 		if (name instanceof CompositeName) {
 			// Which it most certainly will be, and therein lies the
 			// problem. CompositeName.toString() completely screws up the
@@ -169,6 +173,11 @@ public class DefaultDirObjectFactory implements DirObjectFactory {
 			if (log.isDebugEnabled()) {
 				log.debug("Resulting name after removal of referral information: '" + nameString + "'");
 			}
+		}
+
+		if (log.isDebugEnabled()) {
+			log.debug("Preparing to parse DN nameString: " + nameString);
+			log.debug("Preparing to parse DN nameInNamespace: " + nameInNamespace);
 		}
 
 		DirContextAdapter dirContextAdapter = new DirContextAdapter(attrs, new DistinguishedName(nameString),
